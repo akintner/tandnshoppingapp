@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete '/carts', to: 'carts#destroy'
   get    '/cart', to: 'carts#index'
 
-  resources :orders, only: [:new, :create, :index, :show, :update] do
+  resources :orders, only: [:create, :index, :show, :update] do
     resource :receipt
   end
 

@@ -1,3 +1,3 @@
-Given(/^I am on the new order page$/) do
-  visit new_order_path
+Given(/^I am on the order page$/) do
+  visit order_path
 end

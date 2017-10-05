@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       login_user(@user)
-      redirect_to dashboard_path
+      redirect_to products_path
     else
       flash.now[:danger] = 'Name or password incorrect'
       render :new

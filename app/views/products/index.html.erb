@@ -3,9 +3,7 @@
 <ul>
   <%- @products.each do |item| %>
     <li><%= item.name %> - <%= number_to_currency(item.cost) %></li>
-    <li><%= link_to 'Add To Cart', new_order_path, id: 'add_to_cart' %></li>
+    <li><%= button_to 'Add To Cart', carts_path(item_id: item.id) %></li>
   <% end %>
 </ul>
-<br/>
-<br/>
-<p><%= link_to 'See Order', new_order_path %>
+

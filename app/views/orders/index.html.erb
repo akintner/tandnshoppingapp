@@ -1,3 +1,12 @@
-<h1>Orders</h1>
+<h1>My Orders</h1>
+<% @orders.each do |order| %>
+  <ul>
+    <li>Status as of <%= order.updated_at %>: <%= order.status %></li>
+    <li>Order Price: <%= "#{number_to_currency(order.total_price)}" %></li>
+    <li>Order ID: <%= order.id %></li>
+    <li><%= link_to 'Order Details', order_path(order) %></li>
+    <li>Submited: <%= order.created_at %></li>
+  </ul>
+<% end %>
 
 

@@ -1,0 +1,19 @@
+<h3>Items in your Cart:</h3>
+<% if current_user %>
+  <%= link_to('Checkout', orders_path, :method => :post) %>
+<% else %>
+  <%= link_to('Log in or Register to Check out', login_path) %>
+<% end %>
+<br>
+<br>
+<% @items.each do |item| %>
+  <strong><%= item.name %></strong>
+  <p>Price per unit: <%= item.cost %></p>
+  <p>Quantity in cart: <%= @cart.count_of(item.id) %></p>
+  <strong>Subtotal: <%="#{number_to_currency(@cart.subtotal_of(item.id))}" %></strong>
+  <%= button_to "Remove", carts_path(item_id: item.id), method: :delete %>
+<% end %>
+<h4>Total Price: <%= "#{number_to_currency(@cart.total_price)}" %></h4>
+<br>
+<br>
+<%= link_to('Back to All Products', products_path) %>

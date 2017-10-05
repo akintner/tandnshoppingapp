@@ -1,0 +1,9 @@
+<h4>Order Total: <%= "#{number_to_currency(@order.total_price)}" %></h4>"
+
+<ul>
+<% @order.products.each do |item| %>
+  <li><strong><%= link_to item.name, item_path(item) %></strong></li>
+  <li>Subtotal: <%= "#{number_to_currency(@order.subtotal(item))}" %></li>
+<% end %>
+
+<%= link_to 'Back to Orders', orders_path %>

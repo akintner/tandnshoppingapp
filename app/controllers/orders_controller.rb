@@ -1,26 +1,31 @@
 class OrdersController < ApplicationController
-  def new
-    @order = Order.new
-    @order.line_items.build
+  # before_action :require_admin, only: [:update]
+  
+  def index
+    @orders = current_user.sorted_orders
+    @cart = @cart.contents
+  end
+
+  def show
+    @order = Order.find(params[:id])
+
+    redirect_to products_path unless @order.verified_user?(current_user)
   end
 
   def create
-    @order = Order.new(order_params)
-    if @order.valid?
-      @order.save
-      redirect_to order_receipt_path(@order)
-    else
-      render :new
-    end
+    order = current_user.orders.create
+    Checkout.new(@cart.contents).submit(order)
+
+    session.delete(:cart) 
+    flash[:success] = "Order was successfully placed"
+    redirect_to orders_path
   end
 
-  private
-  def order_params
-    params.require(:order).permit(line_items_attributes: [:id, :name, :product_id ])
-  end
+  # def update
+  #   order = Order.find(params[:id])
+  #   order.update(status: params[:status].to_i)
 
-  def products
-    @products ||= Product.all
-  end
-  helper_method :products
+  #   flash[:success] = "Order #{order.id} updated to #{order.status}"
+  #   redirect_to admin_dashboard_path
+  # end
 end
