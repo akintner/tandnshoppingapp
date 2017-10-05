@@ -1,0 +1,11 @@
+<h1>Products</h1>
+
+<ul>
+  <%- @products.each do |item| %>
+    <li><%= item.name %> - <%= number_to_currency(item.cost) %></li>
+    <li><%= link_to 'Add To Cart', new_order_path, id: 'add_to_cart' %></li>
+  <% end %>
+</ul>
+<br/>
+<br/>
+<p><%= link_to 'See Order', new_order_path %>
