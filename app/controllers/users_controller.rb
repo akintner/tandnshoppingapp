@@ -17,7 +17,9 @@ class UsersController < ApplicationController
       end
     end
   
-    def show      
+    def show
+      redirect_to admin_dashboard_path if current_admin?
+      
       @orders = current_user.orders
     end
   
