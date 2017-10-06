@@ -9,6 +9,7 @@
   </head>
 
   <body>
+    <%= render partial: 'shared/nav'  %> 
     <%= render :partial => "shared/flash", :locals => {:flash => flash} %>  
     <%= yield %>
   </body>
