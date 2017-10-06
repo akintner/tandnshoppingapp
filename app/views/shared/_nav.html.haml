@@ -7,8 +7,12 @@
 .collapse.navbar-collapse.navbar-ex1-collapse
   %ul.nav.navbar-nav.navbar-left
     %li 
-      - if current_user
+      - if current_admin?
+        = link_to 'See Customer Experience Rep Dashboard', admin_dashboard_path
+      - elsif current_user
         = link_to "Logged in as #{current_user.username}", products_path
+      - else
+        = link_to "See All Prodcuts", products_path
   %ul.nav.navbar-nav.navbar-right
     %li
       %a{ href: cart_path }
