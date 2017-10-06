@@ -6,7 +6,7 @@ Feature: Customer creates an order
      | Twin  | 325.00 |
      | Queen | 575.00 |
      | King  | 700.00 |
-    And I am on the new order page
+    And I go to the new order page
 
   Scenario:
     When I choose "Queen $575.00"
