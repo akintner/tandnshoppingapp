@@ -22,9 +22,9 @@ class OrdersController < ApplicationController
 
   def update
     order = Order.find(params[:id])
-    order.update(status: params[:status].to_i)
+    order.update(channel: params[:channel].to_i)
 
-    flash[:success] = "Order #{order.id} updated to #{order.status}"
+    flash[:success] = "Order #{order.id} updated to sales channel #{order.channel}"
     redirect_to admin_dashboard_path
   end
 end

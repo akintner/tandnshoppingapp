@@ -1,42 +1,49 @@
 .orders-container
 .orders-header
   .header
-    %h3 #{@header if @header} Orders
+    %h3 #{@header if @header} All Orders
   .sort-by
     .dropdown
       %a.dropdown-toggle{ "data-toggle" => "dropdown", href: "#" }
-        Filter by Status
+        Filter by Sales Channel
         %b.caret
       %ul.dropdown-menu
         %li
-          = link_to 'all', admin_dashboard_path
-        - @statuses.each do |status|
+          = link_to 'All', admin_dashboard_path
+        - @channels.each do |channel|
           %li
-            = link_to status, admin_dashboard_path(:status => status)
+            = link_to channel, admin_dashboard_path(:channel => channel)
 - @orders.each do |order|
   .order
     .order-info
+      %p <strong>Order ID:</strong> #{order.id}
       %p <strong>User: </strong> #{order.user.username}
       %p <strong>Total:</strong> #{number_to_currency(order.total_price)} 
-      %p <strong>Submitted:</strong> #{order.created_at}
-      - if order.completed? || order.cancelled?
-        %p <strong>Status:</strong> #{order.status}
-      - else
+      - if order.channel?
         .dropdown
           %a.dropdown-toggle{ "data-toggle" => "dropdown", href: "#" }
-            <strong>Status:</strong> #{order.status}
+            <strong>Sales Channel:</strong> #{order.channel}
             %b.caret
           %ul.dropdown-menu
-            - if order.ordered?
+            - if order.online?
               %li
-                = link_to('mark as paid', order_path(order, status: 1), method: :put)
-            - if order.paid?
+                = link_to('mark as CX', order_path(order, channel: 1), method: :put)
+            - if order.cx?
               %li
-                = link_to('mark as completed', order_path(order, status: 3), method: :put)
-            - if order.paid? || order.ordered?
+                = link_to('mark as retail', order_path(order, channel: 2), method: :put)
+            - if order.retail?
               %li
-                = link_to('cancel', order_path(order, status: 2), method: :put)
+                = link_to('mark as online', order_path(order, channel: 0), method: :put)
+            - if order.online?
+              %li
+                = link_to('mark as retail', order_path(order, channel: 2), method: :put)
+            - if order.cx?
+              %li
+                = link_to('mark as online', order_path(order, channel: 0), method: :put)
+            - if order.retail?
+              %li
+                = link_to('mark as cx', order_path(order, channel: 1), method: :put)
+      %p <strong>Submitted:</strong> #{order.created_at}
       %p <strong>Updated At:</strong> #{order.updated_at}
-      %p <strong>Order ID:</strong> #{order.id}
-    .order-button
-      = link_to 'Order Details', order_path(order)
+  .order-button
+    = link_to 'Order Details', order_path(order)
