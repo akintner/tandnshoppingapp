@@ -1,0 +1,21 @@
+%nav.navbar.navbar-inverse{ role: "navigation" }
+.navbar-header
+  %button.navbar-toggle{ "data-target" => ".navbar-ex1-collapse", "data-toggle" => "collapse", type: "button" }
+    %span.sr-only Toggle navigation
+    %span.icon-bar
+/ Collect the nav links, forms, and other content for toggling
+.collapse.navbar-collapse.navbar-ex1-collapse
+  %ul.nav.navbar-nav.navbar-left
+    %li 
+      - if current_user
+        = link_to "Logged in as #{current_user.username}", products_path
+  %ul.nav.navbar-nav.navbar-right
+    %li
+      %a{ href: cart_path }
+        View Cart
+        %span.badge= @cart.total_count
+    %li
+      - if current_user
+        = link_to 'Logout', logout_path, method: :delete
+      -else
+        = link_to 'Login', login_path

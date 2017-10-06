@@ -3,7 +3,6 @@ class SessionsController < ApplicationController
   
   def new
     redirect_to dashboard_path if current_user
-    @head_title = ' | Login'
   end
 
   def create

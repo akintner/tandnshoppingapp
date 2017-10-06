@@ -1,12 +1,20 @@
 <h4>Order Total: <%= "#{number_to_currency(@order.total_price)}" %></h4>
 
+<% if current_admin? %>
+  <p><strong>User:</strong> <%= "#{@order.user.name}" %></p>
+  <p><strong>Email:</strong>  <%="#{@order.user.email}" %></p>
+  <p><strong>Submitted:</strong> <%= "#{@order.created_at}" %></p>
+  <p><strong>Status:</strong> <%= "#{@order.status}, Date: #{@order.updated_at}" %></p>
+  <p><strong>Order ID:</strong> <%= "#{@order.id}" %></p>
+<% end %>
+
 <ul>
   <% @order.products.each do |item| %>
     <li><strong><%= link_to item.name, product_path(item.id) %></strong></li>
     <li><%= number_to_currency(item.cost) %></li>
-  <% end %>
-  <% @order.line_items.each do |line_item| %>
-    <li>Quantity in cart: <%= line_item.quantity %></li>
+    <% @order.line_items.each do |line_item| %>
+      <li>Quantity in cart: <%= line_item.quantity %></li>
+    <% end %>
   <% end %>
 </ul>
 

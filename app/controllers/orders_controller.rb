@@ -1,12 +1,12 @@
 class OrdersController < ApplicationController
-  # before_action :require_admin, only: [:update]
+  before_action :require_admin, only: [:update]
   
   def index
     @orders = current_user.sorted_orders
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:id].to_i)
 
     redirect_to products_path unless @order.verified_user?(current_user)
   end
@@ -20,11 +20,11 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
-  # def update
-  #   order = Order.find(params[:id])
-  #   order.update(status: params[:status].to_i)
+  def update
+    order = Order.find(params[:id].to_i)
+    order.update(status: params[:status].to_i)
 
-  #   flash[:success] = "Order #{order.id} updated to #{order.status}"
-  #   redirect_to admin_dashboard_path
-  # end
+    flash[:success] = "Order #{order.id} updated to #{order.status}"
+    redirect_to admin_dashboard_path
+  end
 end

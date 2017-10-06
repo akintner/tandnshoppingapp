@@ -16,7 +16,7 @@
 - @orders.each do |order|
   .order
     .order-info
-      %p <strong>User: </strong> #{order.user.name}
+      %p <strong>User: </strong> #{order.user.username}
       %p <strong>Total:</strong> #{number_to_currency(order.total_price)} 
       %p <strong>Submitted:</strong> #{order.created_at}
       - if order.completed? || order.cancelled?
@@ -39,4 +39,4 @@
       %p <strong>Updated At:</strong> #{order.updated_at}
       %p <strong>Order ID:</strong> #{order.id}
     .order-button
-      = link_to 'Order Details', order_path(order), class: 'btn'
+      = link_to 'Order Details', order_path(order.id)

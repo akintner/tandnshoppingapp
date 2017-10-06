@@ -52,39 +52,4 @@
       padding: 2px 0;
     }
   }
-  @media (min-width: 768px) {
-    h3 {
-      font-size: 30px;
-    }
-    p {
-      font-size: 15px;
-    }
-    .order {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-between;
-      margin: 0 auto;
-      width: 100%;
-      background: $gray;
-      padding: 10px;
-      margin-bottom: 20px;
-      align-items: center;
-      .order-button {
-        width: 50%;
-        order: 2;
-        a {
-          padding: 15px 0;
-          width: 100%;
-          text-align: center;
-        }
-      }
-      .order-info {
-        padding: 1px 0;
-        width: 50%;
-        font-size: 15px;
-        order: 1;
-        text-align: left;
-      }
-    }
-  }
 }

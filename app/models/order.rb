@@ -5,6 +5,8 @@ class Order < ApplicationRecord
   
   accepts_nested_attributes_for :line_items
 
+  enum status: %w(ordered paid cancelled completed)  
+
   def total_price
     line_items.map { |item| item.current_price_per_unit * item.quantity.to_f }.sum
   end
@@ -17,10 +19,10 @@ class Order < ApplicationRecord
   #   line_item(item).quantity
   # end
 
-  # def self.by_status(status)
-  #   orders = Order.send(status) rescue Order.all
-  #   orders.order('updated_at DESC')
-  # end
+  def self.by_status(status)
+    orders = Order.send(status) rescue Order.all
+    orders.order('updated_at DESC')
+  end
 
   def verified_user?(current_user)
     user_id == current_user.id
