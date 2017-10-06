@@ -6,6 +6,8 @@ class User < ApplicationRecord
   
   has_many :orders
 
+  enum role: %w(default admin)  
+
   def verified?(params_id)
     id == params_id.to_i
   end
