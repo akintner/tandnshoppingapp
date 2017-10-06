@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id].to_i)
+    @order = Order.find(params[:id])
 
     redirect_to products_path unless @order.verified_user?(current_user)
   end
@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    order = Order.find(params[:id].to_i)
+    order = Order.find(params[:id])
     order.update(status: params[:status].to_i)
 
     flash[:success] = "Order #{order.id} updated to #{order.status}"

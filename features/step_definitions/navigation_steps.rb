@@ -1,3 +1,3 @@
-Given(/^I am on the order page$/) do
-  visit order_path
-end
+When /^I go to the "(.*)"/ do |place|
+  visit "/#{place}"
+ end

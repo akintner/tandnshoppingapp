@@ -5,5 +5,6 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get login_path
 
     assert_response :success
+    assert_redirected_to login_path
   end
 end
