@@ -1,9 +1,16 @@
-<h4>Order Total: <%= "#{number_to_currency(@order.total_price)}" %></h4>"
+<h4>Order Total: <%= "#{number_to_currency(@order.total_price)}" %></h4>
 
 <ul>
-<% @order.products.each do |item| %>
-  <li><strong><%= link_to item.name, item_path(item) %></strong></li>
-  <li>Subtotal: <%= "#{number_to_currency(@order.subtotal(item))}" %></li>
-<% end %>
+  <% @order.products.each do |item| %>
+    <li><strong><%= link_to item.name, product_path(item.id) %></strong></li>
+    <li><%= number_to_currency(item.cost) %></li>
+  <% end %>
+  <% @order.line_items.each do |line_item| %>
+    <li>Quantity in cart: <%= line_item.quantity %></li>
+  <% end %>
+</ul>
 
 <%= link_to 'Back to Orders', orders_path %>
+<br>
+<br>
+<%= link_to 'Back to All Products', products_path %>

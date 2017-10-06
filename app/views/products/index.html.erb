@@ -1,9 +1,15 @@
-<h1>Products</h1>
-
+<h1>THE INTERNET’S MOST COMFORTABLE MATTRESS</h1>
+<h3>100‐night sleep trial, free delivery and hassle‐free returns.</h3>
+<br>
+<br>
+<h4>Our Products</h4>
 <ul>
-  <%- @products.each do |item| %>
-    <li><%= item.name %> - <%= number_to_currency(item.cost) %></li>
+  <% @products.each do |item| %>
+    <li><%= link_to item.name, product_path(item.id) %></li>
+    <li><%= number_to_currency(item.cost) %></li>
     <li><%= button_to 'Add To Cart', carts_path(item_id: item.id) %></li>
   <% end %>
 </ul>
+<br>
+<p><%= link_to 'View your current cart', cart_path %></p>
 

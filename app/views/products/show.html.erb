@@ -1,0 +1,8 @@
+<h3>Welcome to the <%= @product.name %> page</h3>
+<br>
+<h4>Our <%= @product.name %> is <%= number_to_currency(@product.cost) %></h4>
+<br>
+<br>
+<p>Mattress Dimensions: <%= @product.dimensions %></p>
+<br>
+<p><%= link_to 'View your current cart', cart_path %></p>

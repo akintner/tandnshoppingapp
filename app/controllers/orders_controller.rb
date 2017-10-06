@@ -3,7 +3,6 @@ class OrdersController < ApplicationController
   
   def index
     @orders = current_user.sorted_orders
-    @cart = @cart.contents
   end
 
   def show

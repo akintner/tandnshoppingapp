@@ -10,7 +10,7 @@ class CartsController < ApplicationController
     session[:cart] = @cart.contents
 
     flash[:success] = "You now have 
-    #{pluralize(@cart.count_of(item.id), "mattress")} of 
+    #{pluralize(@cart.count_of(item.id), "order")} of 
     #{item.name} in your cart."
     
     redirect_back(fallback_location: products_path)
@@ -32,7 +32,7 @@ class CartsController < ApplicationController
     @cart.remove(item.id)
 
     flash[:success] = "Successfully removed
-    #{view_context.link_to(item.name)} from your cart."
+    #{item.name} from your cart."
 
     redirect_to cart_path
   end
