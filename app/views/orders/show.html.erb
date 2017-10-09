@@ -1,7 +1,7 @@
 <h4>Order Total: <%= "#{number_to_currency(@order.total_price)}" %></h4>
 
 <% if current_admin? %>
-  <p><strong>User:</strong> <%= "#{@order.user.name}" %></p>
+  <p><strong>User:</strong> <%= "#{@order.user.username}" %></p>
   <p><strong>Email:</strong>  <%="#{@order.user.email}" %></p>
   <p><strong>Submitted:</strong> <%= "#{@order.created_at}" %></p>
   <p><strong>Sales Channel:</strong> <%= "#{@order.channel}, Date: #{@order.updated_at}" %></p>
