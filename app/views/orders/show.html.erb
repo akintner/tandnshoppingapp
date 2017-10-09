@@ -12,9 +12,7 @@
   <% @order.products.each do |item| %>
     <li><strong><%= link_to item.name, product_path(item.id) %></strong></li>
     <li><%= number_to_currency(item.cost) %></li>
-    <% @order.line_items.each do |line_item| %>
-      <li>Quantity in cart: <%= line_item.quantity %></li>
-    <% end %>
+    <li>Quantity in cart: <%= @order.line_items.find_by(product_id: item.id).quantity %></li>
   <% end %>
 </ul>
 
